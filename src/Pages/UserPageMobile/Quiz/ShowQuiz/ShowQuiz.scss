@@ -1,0 +1,32 @@
+.showQuiz {
+  background-color: #ffd344;
+  width: 724px;
+  height: 560px;
+  margin-top: 86px;
+  padding: 57px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .quizAndTimer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .quizNumber div {
+      font-size: 36px;
+    }
+
+    .quizNumber span {
+      font-size: 120px;
+    }
+
+    .timer {
+      border: 10px solid #3b3b3b;
+      opacity: 0.15;
+      border-radius: 50%;
+      font-size: 36px;
+      padding: 38px 20px;
+    }
+  }
+}

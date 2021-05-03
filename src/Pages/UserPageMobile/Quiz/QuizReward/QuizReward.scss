@@ -1,0 +1,39 @@
+.quizReward {
+  background-color: #ffffff;
+  width: 1720px;
+  height: 280px;
+  margin: 0 auto;
+  padding: 22px 60px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .title {
+    flex-basis: 20%;
+    font-weight: bold;
+
+    span {
+      color: #ffd344;
+      font-size: 36px;
+    }
+    div {
+      font-size: 50px;
+      margin-top: 10px;
+    }
+  }
+
+  .contents {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 48px;
+    .content {
+      display: flex;
+      margin-bottom: 20px;
+      img {
+        margin-right: 10px;
+      }
+    }
+  }
+}
