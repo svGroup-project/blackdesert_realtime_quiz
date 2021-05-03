@@ -7,14 +7,10 @@ import {
   isMobile,
 } from "react-device-detect";
 
-import "./Intro.scss";
+import "./MobileIntro.scss";
 
-const Intro = () => {
+const MobileIntro = () => {
   const { language, onClickHandler, goToQuiz } = this.props;
-
-  const sLangType = navigator.language || navigator.userLanguage;
-  console.log(sLangType);
-
   return (
     <div className="introContainer">
       <div className="titleContainer">
@@ -93,6 +89,6 @@ const Intro = () => {
   );
 };
 
-export default Intro;
+export default MobileIntro;
 
 const LANGUAGES = ["kr", "en", "ru", "th", "tu", "po", "ch", "jp"];
