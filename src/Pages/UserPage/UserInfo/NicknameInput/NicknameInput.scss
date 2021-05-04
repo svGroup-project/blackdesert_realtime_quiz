@@ -1,9 +1,9 @@
 .nickNameInput {
   position: relative;
   width: 1040px;
-  height: 180px;
+  height: 140px;
   background-color: white;
-  margin: 0 auto;
+  margin: 30px auto 0 auto;
   padding: 0 40px;
   display: flex;
   justify-content: space-around;
@@ -17,7 +17,7 @@
   }
   .nickname {
     width: 780px;
-    height: 82px;
+    height: 72px;
     font-size: 20px;
     font-weight: bold;
     padding: 10px 30px;
@@ -32,7 +32,7 @@
     right: 48px;
     background-color: #999999;
     width: 120px;
-    height: 82px;
+    height: 72px;
     font-size: 18px;
     color: #ffffff;
     &:hover {

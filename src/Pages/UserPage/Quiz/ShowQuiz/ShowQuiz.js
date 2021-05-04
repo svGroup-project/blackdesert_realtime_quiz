@@ -3,22 +3,20 @@ import EachQuiz from "./EachQuiz/EachQuiz";
 import Reward from "./Reward/Reward";
 import "./ShowQuiz.scss";
 
-const ShowQuiz = () => {
+const ShowQuiz = ({ quizNum }) => {
   return (
     <div className="showQuiz">
       <div className="quizAndTimer">
         <div className="quizNumber">
           <div>Quiz</div>
-          <span>1</span>
+          <span>{quizNum}</span>
         </div>
+        {/*타이머 작동시키기*/}
         <span className="timer">
           <span className="number">5:00</span>
         </span>
       </div>
-      {/* 제일 처음 문제 보상을 보여줌 */}
-      <Reward />
-      {/* 문제보상 나오고 퀴즈 시작되면 퀴즈 내용으로 바뀜 */}
-      {/* <EachQuiz /> */}
+      {quizNum ? <EachQuiz /> : <Reward />}
     </div>
   );
 };

@@ -19,10 +19,10 @@ const Intro = () => {
     <div className="introContainer">
       <div className="titleContainer">
         <div className="title">
-          <img src="/images/title.png" />
+          <img src="images/title.png" />
         </div>
         <div className="shortTitle">
-          <img src="/images/그룹 5697.png" />
+          <img src="images/newLogo.png" />
         </div>
       </div>
       <div className="languageContainer">

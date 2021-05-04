@@ -23,7 +23,7 @@
 
   .languageContainer {
     width: 840px;
-    height: 200px;
+    height: 180px;
     text-align: center;
     margin: 0 auto 30px auto;
     background-color: rgba(0, 0, 0, 0.7);
@@ -48,11 +48,11 @@
         height: 90px;
         line-height: 90px;
         opacity: 50%;
-        cursor: pointer;
-        &:hover {
-          background: linear-gradient(to bottom, #ffe078, #fbc000, #c48900);
-          opacity: 1;
-        }
+        // cursor: pointer;
+        // &:hover {
+        //   background: linear-gradient(to bottom, #ffe078, #fbc000, #c48900);
+        //   opacity: 1;
+        // }
       }
 
       .imgContainer.selected {
@@ -64,7 +64,7 @@
 
   .platformContainer {
     width: 840px;
-    height: 200px;
+    height: 180px;
     text-align: center;
     margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.7);
@@ -92,6 +92,9 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+        &:hover {
+          cursor: pointer;
+        }
 
         // .pcImg.selected, .mobileImg.selected {
         //   color: #ffd344;
@@ -125,22 +128,25 @@
     margin: 30px auto 0 auto;
     background-color: rgba(255, 255, 255, 0.5);
     width: 840px;
-    height: 100px;
+    height: 80px;
     text-align: center;
-    padding-top: 25px;
-    cursor: pointer;
-    &:hover {
-      background-color: #ffffff;
-      .enterBtn {
-        color: #ffd344;
-      }
-    }
+    padding-top: 15px;
 
     .enterBtn {
       font-size: 36px;
       color: #ffffff;
       background-color: transparent;
       font-weight: bold;
+    }
+  }
+
+  .btnContainer.active {
+    background-color: #ffffff;
+    cursor: pointer;
+
+    .enterBtn {
+      color: #ffd344;
+      cursor: pointer;
     }
   }
 }

@@ -1,9 +1,10 @@
 {
   "RESULT": {
-    "id": 1,
-    "console_img": "/images/path 22.png",
-    "console": "발크스의 조언",
-    "mobile_img": "/images/path 22.png",
-    "mobile": "돌파복구권"
+    "status": "보상확인응답",
+    "quiz_num": 1,
+    "mobile_reward": "Balck desert Mobile: 돌파복구권",
+    "mobile_reward_url": "/images/path 22.png",
+    "PC_reward": "Black Desert & Balck desert Console : 발크스의 조언",
+    "PC_reward_url": "/images/path 22.png"
   }
 }

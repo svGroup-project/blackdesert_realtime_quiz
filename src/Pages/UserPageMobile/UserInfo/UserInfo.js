@@ -46,7 +46,7 @@ const UserInfo = () => {
   return (
     <div className="userInfoContainer">
       <StatusBar />
-      <VideoPlayer width={"1040px"} height={"584.9px"} />
+      <VideoPlayer width={"1040px"} height={"584.9px"} marginTop={"60px"} />
       {/* nickname state가 없으면 nickname입력컴포넌트부터 보여주고,
       입력완료 눌렀을 때 state가 있으면  input 컴포넌트를  watingstatus 컴포넌트로 변경*/}
       {nickName ? (
