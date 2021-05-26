@@ -3,7 +3,7 @@ import "./Correct.scss";
 
 const Correct = () => {
   return (
-    <div className="correct">
+    <div className="correctAnswer">
       <div className="statement">
         <i class="far fa-circle"></i>
         <span className="highlight">정답</span> 입니다.

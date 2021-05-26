@@ -26,13 +26,10 @@ const UserInfo = () => {
       .then((res) => setMovieUrl(res["movie-url"]));
   }, []);
 
-  // input state에 닉네임 input값 저장
   const onChangeHandler = (e) => {
     setInput(e.target.value);
   };
 
-  // 서버에 lang, platform, nickname 전송위한 입력완료 클릭 시
-  // nickname state에 저장된 input값 setting
   const onClickHandler = () => {
     // DB에 정보 보내면 서버에서 token 받아서 localstorage에 저장하기
     fetch("http://localhost:8000/users", {
@@ -54,12 +51,11 @@ const UserInfo = () => {
       console.log("userInfo: 웹소켓 재연결 OK");
       socket.onmessage = (event) => {
         if (event.status === "보상확인") {
-          //ws로 reward_num도 같이 받으므로
-          //실제 pathname : history.push(`/quiz/${event.reward_num}`)로 구현
           history.push({
-            pathname: "/quiz/1",
+            pathname: "/quiz",
             state: {
               movieUrl,
+              quiz_num: event.quiz_num,
             },
           });
         }

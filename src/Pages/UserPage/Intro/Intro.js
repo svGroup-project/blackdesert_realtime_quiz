@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
 import BottomLogo from "../../../Components/BottomLogo/BottomLogo";
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-} from "react-device-detect";
-
 import { useHistory } from "react-router";
 import "./Intro.scss";
 
@@ -16,7 +9,7 @@ const Intro = () => {
   const [platform, setPlatform] = useState("");
   const history = useHistory();
 
-  const socket = new WebSocket("ws://192.168.0.23:8000/users");
+  const socket = new WebSocket("ws://10.58.2.221:8000/users");
   socket.onopen = () => {
     console.log("intro: 웹소켓 연결 OK");
     //서버에서 "입장허용" status를 받으면 isActive false -> true하여 입장버튼 활성화
@@ -53,12 +46,12 @@ const Intro = () => {
 
   const goToUserInfo = () => {
     //버튼이 active되지 않거나 platform이 선택되지않으면 quiz로 넘어가지 않음
-    if (isActive !== true || platform === "") {
-      return;
-    }
+    // if (isActive !== true || platform === "") {
+    //   return;
+    // }
 
-    const userLang = { language: language };
-    socket.send(JSON.stringify(userLang));
+    // const userLang = { language: language };
+    // socket.send(JSON.stringify(userLang));
 
     history.push({
       pathname: "/userInfo",
@@ -135,7 +128,6 @@ const Intro = () => {
             </div>
           </div>
         </div>
-        ) : (
       </div>
       <div className={`btnContainer ${isActive ? "active" : ""}`}>
         <button onClick={goToUserInfo} className="enterBtn">

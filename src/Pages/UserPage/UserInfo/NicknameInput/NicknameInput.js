@@ -4,7 +4,7 @@ import "./NicknameInput.scss";
 const NicknameInput = ({ onChangeHandler, onClickHandler }) => {
   return (
     <div className="nickNameInput">
-      <span className="nickTitle">Nickname</span>
+      <img src="/images/nickname.png" width="144.5" height="154.5" />
       <input
         type="text"
         className="nickname"
