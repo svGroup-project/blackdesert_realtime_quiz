@@ -45,13 +45,13 @@ const Intro = () => {
   };
 
   const goToUserInfo = () => {
-    //버튼이 active되지 않거나 platform이 선택되지않으면 quiz로 넘어가지 않음
-    // if (isActive !== true || platform === "") {
-    //   return;
-    // }
+    // 버튼이 active되지 않거나 platform이 선택되지않으면 quiz로 넘어가지 않음
+    if (isActive !== true || platform === "") {
+      return;
+    }
 
-    // const userLang = { language: language };
-    // socket.send(JSON.stringify(userLang));
+    const userLang = { language: language };
+    socket.send(JSON.stringify(userLang));
 
     history.push({
       pathname: "/userInfo",
@@ -85,7 +85,7 @@ const Intro = () => {
                 }
                 key={idx}
               >
-                <img src={`/images/${lang}.png`} />
+                <img src={`/images/${lang}.png`} alt="languageImg" />
               </span>
             );
           })}
