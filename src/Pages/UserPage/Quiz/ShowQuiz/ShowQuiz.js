@@ -16,7 +16,7 @@ const ShowQuiz = ({ status, quizNum, data }) => {
           <span className="number">5:00</span>
         </span>
       </div>
-      {status === "보상확인" && status === "정답확인" ? (
+      {status === "보상확인" || status === "정답확인" ? (
         <Reward rate={data.reward_rate} />
       ) : (
         <EachQuiz quiz={data.quiz} />

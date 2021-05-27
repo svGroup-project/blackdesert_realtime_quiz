@@ -8,5 +8,5 @@
     "3": "형제",
     "4": "사촌"
   },
-  "is_answer": { "1": false, "2": true, "3": false, "4": false }
+  "is_answer": { "1": false, "2": false, "3": true, "4": false }
 }

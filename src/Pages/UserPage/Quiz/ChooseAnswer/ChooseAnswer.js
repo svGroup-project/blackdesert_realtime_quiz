@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import "./ChooseAnswer.scss";
 
-const ChooseAnswer = ({ checkAnswer, fetchAnswer, data }) => {
-  const [selectedAnswer, setSelectedAnswer] = useState();
-  console.log(data.ans);
+const ChooseAnswer = ({ checkAnswer, data }) => {
+  // const onClickHandler = (idx) => {
+  //   const trueOrFalse = checkAnswer(idx);
+  //   if (trueOrFalse === true) {
+  //     // 유저가 선택한 답이 정답이면 fetchAnswer에 해당 문제번호와 true를 보내고
+  //     fetchAnswer(data.quiz_num, true);
+  //   } else {
+  //     // 유저가 선택한 답이 오답이면 fetchAnswer에 해당 문제번호와 false를 보냄
+  //     fetchAnswer(data.quiz_num, false);
+  //   }
+  // };
   return (
     <div className="chooseAnswer">
       <div className="title">
@@ -14,7 +22,11 @@ const ChooseAnswer = ({ checkAnswer, fetchAnswer, data }) => {
         {data.ans &&
           Object.entries(data.ans).map(([key, value], idx) => {
             return (
-              <div className="content" onClick={() => checkAnswer(idx + 1)}>
+              <div
+                key={idx}
+                className="content"
+                onClick={() => checkAnswer(idx + 1)}
+              >
                 <span>{key}</span>
                 <div className="answer">{value}</div>
               </div>

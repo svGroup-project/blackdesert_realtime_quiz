@@ -1,16 +1,17 @@
 import React from "react";
 import "./ShowResult.scss";
 
-const ShowResult = () => {
+const ShowResult = ({ data }) => {
+  console.log(data);
   return (
     <div className="showResult">
       <div className="resultTitle">퀴즈결과</div>
-      <div className="result">10개 문제 중,</div>
+      <div className="result">15개 문제 중,</div>
       <div className="correct">
-        <span>8문제</span> 정답
+        <span>{data.correct}문제</span> 정답
       </div>
       <div className="wrong">
-        <span>2문제</span> 오답
+        <span>{data.wrong}문제</span> 오답
       </div>
     </div>
   );

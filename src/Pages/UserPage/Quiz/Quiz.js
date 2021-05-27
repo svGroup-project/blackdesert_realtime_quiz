@@ -19,37 +19,27 @@ const Quiz = () => {
   const { movieUrl } = location;
 
   const [data, setData] = useState([]);
-  const [status, setStatus] = useState("퀴즈시작");
+  const [status, setStatus] = useState("보상확인");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isCorrectAnswer, setIsCorrectAnswer] = useState(null);
   const quizNumRef = useRef(1);
 
-  // 정답 오답 여부
-  const checkAnswer = (answer) => {
-    // 유저가 고른 index가 is_answer에서 value가 true인 key와 동일하다면
-    // return true or false
-    // if(answer === Object.values(data.is_answer))
+  const getKeyByValue = (obj, val) => {
+    return Object.keys(data.is_answer).find((key) => obj[key] === val);
   };
 
-  const fetchAnswer = (answer) => {
-    // const Authorization = localStorage.getItem("Authorization");
-    // fetch(`${API}`, {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: Authorization,
-    //   },
-    //   body: JSON.stringify({
-    //     //   user: user,
-    //     //   answer: answer,
-    //     // }),
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     if (result === "success") {
-    //       setIsSuccess(true);
-    //     }
-    //   });
+  // 정답 오답 여부
+  const checkAnswer = (userAnswer) => {
+    //유저가 답을 선택하지 않으면 setIsCorrectAnswer(null)설정
+    if (!userAnswer) {
+      return setIsCorrectAnswer(null);
+    }
+    const keyByValue = getKeyByValue(data.is_answer, true);
+    return userAnswer === Number(keyByValue)
+      ? setIsCorrectAnswer(true)
+      : setIsCorrectAnswer(false);
   };
+
   const QuizSectionMapper = {
     보상확인: (
       <ShowQuiz status={status} quizNum={quizNumRef.current} data={data} />
@@ -65,24 +55,26 @@ const Quiz = () => {
 
   const AnswerSectionMapper = {
     보상확인: <QuizReward data={data} />,
-    퀴즈시작: (
-      <ChooseAnswer
-        checkAnswer={checkAnswer}
-        fetchAnswer={fetchAnswer}
+    퀴즈시작: <ChooseAnswer checkAnswer={checkAnswer} data={data} />,
+    정답확인: (
+      <ConfirmAnswer
+        isSuccess={isSuccess}
+        isCorrectAnswer={isCorrectAnswer}
+        getKeyByValue={getKeyByValue}
         data={data}
       />
     ),
-    정답확인: <ConfirmAnswer isSuccess={isSuccess} data={data} />,
     결과확인: <EndingStatement />,
   };
 
   useEffect(() => {
-    const socket = new WebSocket("ws://192.168.0.23:8000/quizes");
+    const socket = new WebSocket("ws://192.168.0.24:3000/quizes");
     socket.onopen = () => {
       console.log("quiz: 웹소켓 재연결 OK");
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         const status = data.status;
+        console.log(status);
         switch (status) {
           case "보상확인":
             quizNumRef.current = data.quiz_num;
@@ -107,7 +99,8 @@ const Quiz = () => {
     if (status === "보상확인") {
       const Authorization = localStorage.getItem("Authorization");
       // 실제 api: http://10.58.2.221:8000/reward/${quizNumRef.current}
-      fetch("/data/quizRewardData.json", {
+      // 실제 api(재유님): `http://192.168.0.24:8000/reward/${quizNumRef.current}`
+      fetch(`http://192.168.0.24:8000/reward/${quizNumRef.current}`, {
         headers: {
           Authorization: Authorization,
         },
@@ -117,13 +110,37 @@ const Quiz = () => {
     } else if (status === "퀴즈시작") {
       const Authorization = localStorage.getItem("Authorization");
       // 실제 api: http://10.58.2.221:8000/quiz/${quizNumRef.current}
-      fetch("/data/quizData.json", {
+      // 실제 api(재유님):`http://192.168.0.24:8000/quiz/${quizNumRef.current}`
+      fetch(`http://192.168.0.24:8000/quiz/${quizNumRef.current}`, {
         headers: {
           Authorization: Authorization,
         },
       })
         .then((res) => res.json())
-        .then((res) => setData(res));
+        .then((res) => {
+          setData(res);
+        });
+    } else if (status === "정답확인") {
+      const Authorization = localStorage.getItem("Authorization");
+      fetch(`http://192.168.0.24:8000/quiz`, {
+        method: "POST",
+        headers: {
+          Authorization: Authorization,
+        },
+        body: JSON.stringify({
+          quiz_num: data.quiz_num,
+          answer: isCorrectAnswer,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.result === "success") {
+            // 정답확인중 component를 보여주다가 success를 받으면 정답/오답화면을 보여줌
+            setIsSuccess(true);
+            console.log(res.result);
+            console.log(isSuccess);
+          }
+        });
     } else if (status === "결과확인") {
       const Authorization = localStorage.getItem("Authorization");
       // 실제 api: http://10.58.2.221:8000/result/
