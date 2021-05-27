@@ -19,21 +19,52 @@ const Quiz = () => {
   const { movieUrl } = location;
 
   const [data, setData] = useState([]);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("퀴즈시작");
   const [isSuccess, setIsSuccess] = useState(false);
-  const quizNumRef = useRef(0);
+  const quizNumRef = useRef(1);
 
+  // 정답 오답 여부
+  const checkAnswer = (answer) => {
+    // 유저가 고른 index가 is_answer에서 value가 true인 key와 동일하다면
+    // return true or false
+    // if(answer === Object.values(data.is_answer))
+  };
+
+  const fetchAnswer = (answer) => {
+    // const Authorization = localStorage.getItem("Authorization");
+    // fetch(`${API}`, {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: Authorization,
+    //   },
+    //   body: JSON.stringify({
+    //     //   user: user,
+    //     //   answer: answer,
+    //     // }),
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     if (result === "success") {
+    //       setIsSuccess(true);
+    //     }
+    //   });
+  };
   const QuizSectionMapper = {
     보상확인: (
       <ShowQuiz status={status} quizNum={quizNumRef.current} data={data} />
     ),
-    퀴즈시작: <ShowQuiz />,
-    정답확인: <ShowQuiz />,
-    결과발표: <ShowResult />,
+    퀴즈시작: (
+      <ShowQuiz status={status} quizNum={quizNumRef.current} data={data} />
+    ),
+    정답확인: (
+      <ShowQuiz status={status} quizNum={quizNumRef.current} data={data} />
+    ),
+    결과확인: <ShowResult data={data} />,
   };
 
   const AnswerSectionMapper = {
-    보상확인: <QuizReward />,
+    보상확인: <QuizReward data={data} />,
     퀴즈시작: (
       <ChooseAnswer
         checkAnswer={checkAnswer}
@@ -41,8 +72,8 @@ const Quiz = () => {
         data={data}
       />
     ),
-    정답확인: <ConfirmAnswer isSuccess={isSuccess} />,
-    결과발표: <EndingStatement />,
+    정답확인: <ConfirmAnswer isSuccess={isSuccess} data={data} />,
+    결과확인: <EndingStatement />,
   };
 
   useEffect(() => {
@@ -64,8 +95,8 @@ const Quiz = () => {
           case "정답확인":
             setStatus("정답확인");
             break;
-          case "결과발표":
-            setStatus("결과발표");
+          case "결과확인":
+            setStatus("결과확인");
             break;
         }
       };
@@ -75,7 +106,8 @@ const Quiz = () => {
   useEffect(() => {
     if (status === "보상확인") {
       const Authorization = localStorage.getItem("Authorization");
-      fetch(`http://10.58.2.221:8000/reward/${quizNumRef.current}`, {
+      // 실제 api: http://10.58.2.221:8000/reward/${quizNumRef.current}
+      fetch("/data/quizRewardData.json", {
         headers: {
           Authorization: Authorization,
         },
@@ -84,49 +116,26 @@ const Quiz = () => {
         .then((res) => setData(res));
     } else if (status === "퀴즈시작") {
       const Authorization = localStorage.getItem("Authorization");
-      fetch(`http://10.58.2.221:8000/quiz/${quizNumRef.current}`, {
+      // 실제 api: http://10.58.2.221:8000/quiz/${quizNumRef.current}
+      fetch("/data/quizData.json", {
         headers: {
           Authorization: Authorization,
         },
       })
         .then((res) => res.json())
-        .then((res) => console.log(res));
-    } else if (status === "결과발표") {
+        .then((res) => setData(res));
+    } else if (status === "결과확인") {
       const Authorization = localStorage.getItem("Authorization");
-      fetch(`http://10.58.2.221:8000/quiz/${quizNumRef.current}`, {
+      // 실제 api: http://10.58.2.221:8000/result/
+      fetch("/data/quizResult.json", {
         headers: {
           Authorization: Authorization,
         },
       })
         .then((res) => res.json())
-        .then((res) => console.log(res));
+        .then((res) => setData(res));
     }
   }, [status]);
-
-  // 정답 오답 여부
-  const checkAnswer = (answer) => {
-    // return true/false
-  };
-
-  const fetchAnswer = (answer) => {
-    const Authorization = localStorage.getItem("Authorization");
-    fetch(`${API}`, {
-      method: "POST",
-      headers: {
-        Authorization: Authorization,
-      },
-      body: JSON.stringify({
-        user: user,
-        answer: answer,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (result === "success") {
-          setIsSuccess(true);
-        }
-      });
-  };
 
   return (
     <div className="quiz">

@@ -21,10 +21,11 @@
     }
   }
 
-  .contents {
+  .chooseAnswerContents {
+    display: flex;
     color: #ffffff;
 
-    .content {
+    .answerList {
       position: relative;
       width: 260px;
       height: 172px;

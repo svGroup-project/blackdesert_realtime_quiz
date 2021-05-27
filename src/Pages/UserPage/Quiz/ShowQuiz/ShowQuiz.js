@@ -3,7 +3,7 @@ import EachQuiz from "./EachQuiz/EachQuiz";
 import Reward from "./Reward/Reward";
 import "./ShowQuiz.scss";
 
-const ShowQuiz = ({ quizNum }) => {
+const ShowQuiz = ({ status, quizNum, data }) => {
   return (
     <div className="showQuiz">
       <div className="quizAndTimer">
@@ -16,7 +16,11 @@ const ShowQuiz = ({ quizNum }) => {
           <span className="number">5:00</span>
         </span>
       </div>
-      {quizNum ? <EachQuiz /> : <Reward />}
+      {status === "보상확인" && status === "정답확인" ? (
+        <Reward rate={data.reward_rate} />
+      ) : (
+        <EachQuiz quiz={data.quiz} />
+      )}
     </div>
   );
 };

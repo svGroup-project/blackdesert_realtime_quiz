@@ -1,10 +1,11 @@
 import React from "react";
 import "./EachQuiz.scss";
 
-const EachQuiz = () => {
+const EachQuiz = ({ quiz }) => {
+  console.log(quiz);
   return (
     <div className="eachQuiz">
-      <div className="quizContents">제르베즈와 제노베바는 남매 관계이다.</div>
+      <div className="quizContents">{quiz}</div>
     </div>
   );
 };
