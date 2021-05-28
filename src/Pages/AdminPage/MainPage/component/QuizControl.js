@@ -14,54 +14,62 @@ function QuizControl({ adminTab, setAdminTab }) {
   const [firstComponent, setFirstComponent] = useState(true);
   console.log(firstComponent);
 
-  const quizControlSocket = new WebSocket(`${WS}`);
-  // 보내기
-  quizControlSocket.onopen = () => {
-    quizControlSocket.send(
-      JSON.stringify({
-        status: status,
-        quiz_num: quizNumber,
-      })
-    );
-    quizControlSocket.close();
-  };
+  // 실제 연결
+  // const quizControlSocket = new WebSocket(`${WS}`);
+  // // 보내기
+  // quizControlSocket.onopen = () => {
+  //   quizControlSocket.send(
+  //     JSON.stringify({
+  //       status: status,
+  //       quiz_num: quizNumber,
+  //     })
+  //   );
+  //   quizControlSocket.close();
+  // };
 
-  // 받기 (=> status: 큰 컴포넌트 구별, quiz: 퀴즈 데이터)
-  quizControlSocket.onmessage = (e) => {
-    const status = JSON.parse(e.data.status);
-    console.log(JSON.parse(e.data));
+  // // 받기 (=> status: 큰 컴포넌트 구별, quiz: 퀴즈 데이터)
+  // quizControlSocket.onmessage = (e) => {
+  //   console.log("이것은 e");
+  //   console.log(e);
+  //   console.log("이것은 객체로 만든 것");
+  //   console.log(JSON.parse(e.data));
+  //   const status = JSON.parse(e.data.status);
+  //   console.log(status);
 
-    if (status === ("입장허용" || "보상확인")) {
-      setFirstComponent(true);
-    }
-    if (status === ("퀴즈시작" || "정답확인")) {
-      setFirstComponent(false);
-      // fetch(`${API}/quiz/${quizNumber}`)
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     setQuiz(data);
-      //   });
-    }
-  };
-
-  useEffect(() => {
-    if (status === "정답확인") {
-      fetch(`${API}/quiz/${quizNumber}`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setQuiz(data);
-        });
-    }
-  }, [status, quizNumber]);
+  //   if (status === ("입장허용" || "보상확인")) {
+  //     setFirstComponent(true);
+  //     console.log("🦹 1째 컴포넌트 열려랏!!");
+  //   }
+  //   if (status === ("퀴즈시작" || "정답확인")) {
+  //     setFirstComponent(false);
+  //     console.log("🧑‍🎄 2째 컴포넌트 열려랏!!");
+  //     fetch(`${API}/quiz/${quizNumber}`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setQuiz(data);
+  //       });
+  //   }
+  // };
 
   // useEffect(() => {
-  //   fetch("/data/quiz.json")
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       setQuiz(res);
-  //     });
-  // }, []);
+  //   if (status === "정답확인") {
+  //     fetch(`${API}/quiz/${quizNumber}`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log(data);
+  //         setQuiz(data);
+  //       });
+  //   }
+  // }, [status, quizNumber]);
+
+  // MockData 연결
+  useEffect(() => {
+    fetch("/data/quiz.json")
+      .then((res) => res.json())
+      .then((res) => {
+        setQuiz(res);
+      });
+  }, []);
 
   // console.log(quiz);
 

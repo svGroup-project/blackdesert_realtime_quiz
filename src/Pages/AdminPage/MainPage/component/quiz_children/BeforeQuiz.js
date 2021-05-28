@@ -11,9 +11,10 @@ function BeforeQuiz({
   const [nextStep, setNextStep] = useState(0);
 
   const handleStep = () => {
-    nextStep < 2 ? setNextStep(nextStep + 1) : setNextStep(1);
+    nextStep < 2 ? setNextStep(nextStep + 1) : setNextStep(nextStep - 1);
+    console.log(nextStep);
     const netxQuiz = intro_step[0].id;
-    console.log(netxQuiz);
+    // console.log(netxQuiz);
     if (nextStep === 0) {
       setStatus("입장허용");
     }
