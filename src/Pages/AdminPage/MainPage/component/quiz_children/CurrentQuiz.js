@@ -20,7 +20,7 @@ function CurrentQuiz({
   const toNextQize = () => {
     setConfirmBtn(!confirmBtn);
     if (quizNumber < 15) {
-      setStatus("보상확인");
+      setStatus("next");
       setQuizNumber(quizNumber + 1);
       setFirstComponent(true);
     } else {

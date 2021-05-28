@@ -8,51 +8,60 @@ function QuizControl({ adminTab, setAdminTab }) {
   const [quiz, setQuiz] = useState({});
 
   const [status, setStatus] = useState("대기");
-  // console.log(`statue: ${status}`);
+  console.log(`statue: ${status}`);
   const [quizNumber, setQuizNumber] = useState(1);
-  // console.log(`quizNumber: ${quizNumber}`);
+  console.log(`quizNumber: ${quizNumber}`);
   const [firstComponent, setFirstComponent] = useState(true);
+  console.log(firstComponent);
 
   const quizControlSocket = new WebSocket(`${WS}`);
   // 보내기
-  useEffect(() => {
-    quizControlSocket.onopen = () => {
-      quizControlSocket.send(
-        JSON.stringify({
-          status: status,
-          quiz_num: quizNumber,
-        })
-      );
-    };
+  quizControlSocket.onopen = () => {
+    quizControlSocket.send(
+      JSON.stringify({
+        status: status,
+        quiz_num: quizNumber,
+      })
+    );
+    quizControlSocket.close();
+  };
 
-    // 받기 (=> status: 큰 컴포넌트 구별, quiz: 퀴즈 데이터)
-    quizControlSocket.onmessage = (e) => {
-      // console.log(JSON.parse(e.status));
-      if (e.status === "입장허용" || "보상확인") {
-        setFirstComponent(true);
-      }
-      if (e.status === "퀴즈시작" || "정답확인") {
-        setFirstComponent(false);
+  // 받기 (=> status: 큰 컴포넌트 구별, quiz: 퀴즈 데이터)
+  quizControlSocket.onmessage = (e) => {
+    const status = JSON.parse(e.data.status);
+    console.log(JSON.parse(e.data));
 
-        fetch(`${API}/quiz/${quizNumber}`)
-          .then((res) => res.json())
-          .then((data) => {
-            // console.log(data);
-            setQuiz(data);
-          });
-      }
-    };
-  }, [status]);
-
-  quizControlSocket.close();
+    if (status === ("입장허용" || "보상확인")) {
+      setFirstComponent(true);
+    }
+    if (status === ("퀴즈시작" || "정답확인")) {
+      setFirstComponent(false);
+      // fetch(`${API}/quiz/${quizNumber}`)
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     setQuiz(data);
+      //   });
+    }
+  };
 
   useEffect(() => {
-    fetch("/data/quiz.json")
-      .then((res) => res.json())
-      .then((res) => {
-        setQuiz(res);
-      });
-  }, []);
+    if (status === "정답확인") {
+      fetch(`${API}/quiz/${quizNumber}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setQuiz(data);
+        });
+    }
+  }, [status, quizNumber]);
+
+  // useEffect(() => {
+  //   fetch("/data/quiz.json")
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       setQuiz(res);
+  //     });
+  // }, []);
 
   // console.log(quiz);
 
