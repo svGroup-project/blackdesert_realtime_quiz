@@ -8,16 +8,22 @@ import QuizControl from "./component/QuizControl";
 
 function AdminMain() {
   const [tabId, setTabId] = useState(0);
+  const [adminTab, setAdminTab] = useState("TotalData");
 
   const history = useHistory();
 
   const goToLogin = () => {
     localStorage.removeItem("token");
-    history.push("/admin/login");
+    history.push("/");
   };
 
   const tabHandler = (id) => {
     setTabId(id);
+  };
+
+  const TAB_OBJ = {
+    0: <DataTotal />,
+    1: <QuizControl adminTab={adminTab} setAdminTab={setAdminTab} />,
   };
 
   return (
@@ -79,8 +85,3 @@ function AdminMain() {
 }
 
 export default AdminMain;
-
-const TAB_OBJ = {
-  0: <DataTotal />,
-  1: <QuizControl />,
-};

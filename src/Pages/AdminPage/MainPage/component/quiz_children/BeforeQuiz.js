@@ -2,19 +2,29 @@ import React, { useState } from "react";
 import "../../component/QuizControl.scss";
 import { intro_step } from "./intro_step";
 
-function BeforeQuiz() {
+function BeforeQuiz({
+  setStatus,
+  setQuizNumber,
+  quizNumber,
+  setFirstComponent,
+}) {
   const [nextStep, setNextStep] = useState(0);
-  const handleStep = () => {
-    nextStep < 2 ? setNextStep(nextStep + 1) : setNextStep(nextStep - 1);
 
+  const handleStep = () => {
+    nextStep < 2 ? setNextStep(nextStep + 1) : setNextStep(1);
+    const netxQuiz = intro_step[0].id;
+    console.log(netxQuiz);
     if (nextStep === 0) {
-      console.log("입장허용");
+      setStatus("입장허용");
     }
     if (nextStep === 1) {
-      console.log("보상확인");
+      setStatus("보상확인");
     }
     if (nextStep === 2) {
-      console.log("퀴즈시작");
+      setStatus("퀴즈시작");
+      setQuizNumber(quizNumber);
+      setNextStep(1);
+      setFirstComponent(false);
     }
   };
 

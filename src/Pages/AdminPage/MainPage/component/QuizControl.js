@@ -2,35 +2,47 @@ import React, { useState, useEffect } from "react";
 import BeforeQuiz from "./quiz_children/BeforeQuiz";
 import CurrentQuiz from "./quiz_children/CurrentQuiz";
 import "./QuizControl.scss";
-import { WS } from "../../../../config";
+import { WS, API } from "../../../../config";
 
-function QuizControl() {
+function QuizControl({ adminTab, setAdminTab }) {
   const [quiz, setQuiz] = useState({});
-  const [status, setStatus] = useState("");
-  const handleStatus = () => {};
-  // const [quizComponent, quizComponent] = useState(0);
+
+  const [status, setStatus] = useState("대기");
+  // console.log(`statue: ${status}`);
+  const [quizNumber, setQuizNumber] = useState(1);
+  // console.log(`quizNumber: ${quizNumber}`);
+  const [firstComponent, setFirstComponent] = useState(true);
 
   const quizControlSocket = new WebSocket(`${WS}`);
+  // 보내기
+  useEffect(() => {
+    quizControlSocket.onopen = () => {
+      quizControlSocket.send(
+        JSON.stringify({
+          status: status,
+          quiz_num: quizNumber,
+        })
+      );
+    };
 
-  // 버튼 클릭할 때 보내주는 status
-  quizControlSocket.onopen = () => {
-    quizControlSocket.send(
-      JSON.stringify({
-        status: status,
-      })
-    );
-  };
+    // 받기 (=> status: 큰 컴포넌트 구별, quiz: 퀴즈 데이터)
+    quizControlSocket.onmessage = (e) => {
+      // console.log(JSON.parse(e.status));
+      if (e.status === "입장허용" || "보상확인") {
+        setFirstComponent(true);
+      }
+      if (e.status === "퀴즈시작" || "정답확인") {
+        setFirstComponent(false);
 
-  // 받는 status (컴포넌트 구별)
-  // status에 따라 받는 정보 다른가? = (응) => 페이지: QuizNum, 문제: Qiuz
-  quizControlSocket.onmessage = (e) => {
-    console.log(JSON.parse(e.data));
-    fetch("/data/quiz.json")
-      .then((res) => res.json())
-      .then((res) => {
-        setQuiz(res);
-      });
-  };
+        fetch(`${API}/quiz/${quizNumber}`)
+          .then((res) => res.json())
+          .then((data) => {
+            // console.log(data);
+            setQuiz(data);
+          });
+      }
+    };
+  }, [status]);
 
   quizControlSocket.close();
 
@@ -42,29 +54,39 @@ function QuizControl() {
       });
   }, []);
 
-  console.log(quiz);
+  // console.log(quiz);
 
   return (
     <div className="total_data">
       <div className="realtime">실시간 현장 컨트롤</div>
       <div className="quiz_number">
         <div className="quiz">Quiz</div>
-        <div className="number">{quiz.quiz_num}</div>
+        <div className="number">{quizNumber}</div>
       </div>
       <main>
-        {/* {!changeComponent ? (
-          <BeforeQuiz />
-        ) : (
-          quiz.ans && ( */}
-        {quiz.ans && (
-          <CurrentQuiz
-            qestion={quiz.quiz}
-            answer={quiz.ans}
-            isAnswer={quiz.is_answer}
+        {firstComponent ? (
+          <BeforeQuiz
+            setStatus={setStatus}
+            quizNumber={quizNumber}
+            setQuizNumber={setQuizNumber}
+            setFirstComponent={setFirstComponent}
           />
+        ) : (
+          quiz.ans && (
+            <CurrentQuiz
+              qestion={quiz.quiz}
+              answer={quiz.ans}
+              isAnswer={quiz.is_answer}
+              setStatus={setStatus}
+              quizNumber={quizNumber}
+              setQuizNumber={setQuizNumber}
+              firstComponent={firstComponent}
+              setFirstComponent={setFirstComponent}
+              adminTab={adminTab}
+              setAdminTab={setAdminTab}
+            />
+          )
         )}
-        {/* )
-        )} */}
       </main>
     </div>
   );
@@ -72,11 +94,15 @@ function QuizControl() {
 
 export default QuizControl;
 
-// const QUIZ_OBJ = {
-//   0: <BeforeQuiz />,
-//   1: <CurrentQuiz
+// 이 방법으로 할 필요는 없을 듯
+// const COMPONET_OBJ = {
+//   "beforeQiuz": <BeforeQuiz />,
+//   "currentQiuz": <CurrentQuiz
 //   qestion={quiz.quiz}
 //   answer={quiz.ans}
 //   isAnswer={quiz.is_answer}
 // />>
 // };
+{
+  /* <main>{COMPONET_OBJ[firstComponent]}</main> */
+}

@@ -1,15 +1,32 @@
 import React, { useState } from "react";
 import "../../component/QuizControl.scss";
 
-function CurrentQuiz({ qestion, answer, isAnswer }) {
+function CurrentQuiz({
+  qestion,
+  answer,
+  isAnswer,
+  setStatus,
+  setQuizNumber,
+  quizNumber,
+  setFirstComponent,
+}) {
   const [confirmBtn, setConfirmBtn] = useState(true);
 
   const confirmAnswer = () => {
     setConfirmBtn(!confirmBtn);
+    setStatus("정답확인");
   };
 
   const toNextQize = () => {
     setConfirmBtn(!confirmBtn);
+    if (quizNumber < 15) {
+      setStatus("보상확인");
+      setQuizNumber(quizNumber + 1);
+      setFirstComponent(true);
+    } else {
+      setStatus("결과확인");
+      // Data 통계 컴포넌트로 이동
+    }
   };
 
   const answerNum = Object.keys(answer);

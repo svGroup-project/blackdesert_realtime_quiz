@@ -1,5 +1,5 @@
 {
-  "status"   : "퀴즈시작응답",
+  "status"   : "퀴즈시작",
   "quiz_num" : 5,
   "quiz" : "1 + 1 = ?",
   "ans" : {
