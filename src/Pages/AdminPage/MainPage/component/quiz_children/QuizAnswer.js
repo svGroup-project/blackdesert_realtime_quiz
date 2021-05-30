@@ -1,9 +1,11 @@
 import React from "react";
+import { useRecoilState } from "recoil";
+import { userAnswerState } from "../../../../../recoil/quiz";
 import BarChart from "./charts/BarChart";
 
-function QuizAnswer({ userAnswer }) {
+function QuizAnswer() {
+  const [userAnswer, setUserAnswer] = useRecoilState(userAnswerState);
   const quizzes = Object.keys(userAnswer).slice(0, 15);
-  // console.log(userAnswer);
 
   return (
     <div className="quiz_data">
@@ -29,9 +31,6 @@ function QuizAnswer({ userAnswer }) {
           {quizzes.map((quizNumber, idx) => {
             return <BarChart key={idx} data={userAnswer[quizNumber]} />;
           })}
-          {/* {Object.keys(userAnswer).length && (
-            <BarChart data={userAnswer["1"]} />
-          )} */}
         </div>
       </div>
     </div>

@@ -1,19 +1,23 @@
 import React, { useState } from "react";
+import { useRecoilState } from "recoil";
+import { tabIdState, statusState } from "../../../../../recoil/quiz";
 import "../../component/QuizControl.scss";
 
 function CurrentQuiz({
   qestion,
   answer,
   isAnswer,
-  setStatus,
   setQuizNumber,
   quizNumber,
   setFirstComponent,
 }) {
+  const [tabId, setTabId] = useRecoilState(tabIdState);
+  const [status, setStatus] = useRecoilState(statusState);
   const [confirmBtn, setConfirmBtn] = useState(true);
 
   const confirmAnswer = () => {
     setConfirmBtn(!confirmBtn);
+    // 이게 한단계 늦게 보내짐
     setStatus("정답확인");
   };
 
@@ -25,7 +29,7 @@ function CurrentQuiz({
       setFirstComponent(true);
     } else {
       setStatus("결과확인");
-      // Data 통계 컴포넌트로 이동
+      setTabId(0);
     }
   };
 
@@ -38,18 +42,10 @@ function CurrentQuiz({
         {answerNum.map((idx) => {
           return (
             <li>
-              <div
-                className={
-                  !confirmBtn && isAnswer[idx] === "True" && "is_correct_div"
-                }
-              >
+              <div className={!confirmBtn && isAnswer[idx] && "is_correct_div"}>
                 {idx}
               </div>
-              <span
-                className={
-                  !confirmBtn && isAnswer[idx] === "True" && "is_correct"
-                }
-              >
+              <span className={!confirmBtn && isAnswer[idx] && "is_correct"}>
                 {answer[idx]}
               </span>
             </li>

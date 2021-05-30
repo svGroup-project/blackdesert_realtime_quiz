@@ -1,20 +1,16 @@
-import React, { useState } from "react";
-import "../../component/QuizControl.scss";
+import React from "react";
+import { useRecoilState } from "recoil";
+import { nextStepState, statusState } from "../../../../../../src/recoil/quiz";
 import { intro_step } from "./intro_step";
+import "../../component/QuizControl.scss";
 
-function BeforeQuiz({
-  setStatus,
-  setQuizNumber,
-  quizNumber,
-  setFirstComponent,
-}) {
-  const [nextStep, setNextStep] = useState(0);
+function BeforeQuiz({ setFirstComponent }) {
+  const [nextStep, setNextStep] = useRecoilState(nextStepState);
+  const [status, setStatus] = useRecoilState(statusState);
 
   const handleStep = () => {
     nextStep < 2 ? setNextStep(nextStep + 1) : setNextStep(nextStep - 1);
-    console.log(nextStep);
-    const netxQuiz = intro_step[0].id;
-    // console.log(netxQuiz);
+
     if (nextStep === 0) {
       setStatus("입장허용");
     }
@@ -23,7 +19,6 @@ function BeforeQuiz({
     }
     if (nextStep === 2) {
       setStatus("퀴즈시작");
-      setQuizNumber(quizNumber);
       setNextStep(1);
       setFirstComponent(false);
     }

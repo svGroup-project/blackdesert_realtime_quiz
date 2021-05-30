@@ -1,10 +1,13 @@
 import React from "react";
+import { useRecoilState } from "recoil";
+import { userAnswerState, introDataState } from "../../../../../../recoil/quiz";
 import { Bar, defaults } from "react-chartjs-2";
 
-// 200 => 총 참여인원으로
-defaults.scales.linear.max = 120;
-
 function BarChart({ data }) {
+  const [userAnswer, setUserAnswer] = useRecoilState(userAnswerState);
+  console.log(userAnswer.user.total);
+  defaults.scales.linear.max = userAnswer.user.total;
+
   const labels = Object.keys(data);
   const values = Object.values(data);
 
@@ -24,7 +27,23 @@ function BarChart({ data }) {
           ],
         }}
         options={{
-          legend: {
+          plugins: {
+            legend: {
+              title: {
+                display: false,
+              },
+            },
+          },
+          scales: {
+            // display: false,
+            title: {
+              display: false,
+            },
+            grid: {
+              display: false,
+            },
+          },
+          labels: {
             display: false,
           },
           tooltips: {

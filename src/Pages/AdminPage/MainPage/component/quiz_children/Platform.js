@@ -1,7 +1,10 @@
 import React from "react";
 import StackedBar from "./charts/StackedBar";
+import { useRecoilState } from "recoil";
+import { introDataState } from "../../../../../recoil/quiz";
 
 function Platform() {
+  const [introData, setIntroData] = useRecoilState(introDataState);
   return (
     <div className="platform_data">
       <div className="chart_title">게임플랫폼 별 참여 인원</div>
@@ -12,7 +15,7 @@ function Platform() {
             <img src="/images/admin_page/total.png" alt="총인원수" />
             <span>총 참여인원</span>
           </div>
-          <div className="count">1,725</div>
+          <div className="count">{introData.total}</div>
         </div>
 
         <div className="count_all pc_all">
@@ -20,7 +23,7 @@ function Platform() {
             <img src="/images/admin_page/pc.png" alt="pc인원수" />
             <span>PC & Console</span>
           </div>
-          <div className="count pc_alll">1,275</div>
+          <div className="count pc_alll">{introData.PC}</div>
         </div>
 
         <div className="count_all">
@@ -28,7 +31,7 @@ function Platform() {
             <img src="/images/admin_page/mobile.png" alt="mobile인원수" />
             <span>Mobile</span>
           </div>
-          <div className="count mobile_all">449</div>
+          <div className="count mobile_all">{introData.Mobile}</div>
         </div>
       </div>
 

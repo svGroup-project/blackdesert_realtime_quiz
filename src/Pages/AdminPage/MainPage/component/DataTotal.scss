@@ -7,87 +7,54 @@
   border-radius: 24px;
   padding: 65px;
 
-  // 실험
-  
+  .chart_title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
   .intro_data {
     display: flex;
 
-  // 1. 도넛 차트
-  .lang_data{
-    .doughnut_chart {
-      display: flex;
-      width: 675px;
-      // background-color: aqua;
-  
-      .doughnut {
-        width: 300px;
-        height: 400px;
-      }
-      .lang_label {
-        .label_title {
-          font-size: 16px;
-          
-          img {
-            width: 32px;
-          }
-  
-          span {
-            color: aqua;
-          }
-        }
-        
-        .labels {
-          display: flex;
-          color: aqua;
-
-          .color {
-            background-color: rgb(9, 255, 0);
-            border-radius: 50%;
-          }
-        }
-      }
-  }
-  
-  }
     // 2. 플랫폼 차트
-  .platform_data {
-    // background-color: bisque;
-    width: 675px;
+    .platform_data {
+      // background-color: bisque;
+      width: 675px;
 
-    .platform_count {
-      display: flex;
-      
-      // .pc_all {
-      //   border-left:1px solid black ;
-      //   border-right:1px solid black;
-      // }
-      .count_all {
+      .platform_count {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-        width: 200px;
-        margin: 20px 10px;
-        // background-color: blueviolet;
-        .top {
+
+        .pc_all {
+          border-left: 1px solid #dddddd;
+          border-right: 1px solid #dddddd;
+        }
+
+        .count_all {
           display: flex;
+          flex-direction: column;
           align-items: center;
 
-        }
-         img {
-          height: 23px;
-          margin-right:10px ;
-        }
+          width: 200px;
+          margin: 20px 10px;
+          // background-color: blueviolet;
+          .top {
+            display: flex;
+            align-items: center;
+          }
+          img {
+            height: 23px;
+            margin-right: 10px;
+          }
 
-        span {
-          color: #333333;
-          font-size: 16px;
-        }
+          span {
+            color: #333333;
+            font-size: 16px;
+          }
 
-        .count {
-          font-size: 44px;
-          font-weight: bold;
-          margin-top: 20px;
+          .count {
+            font-size: 44px;
+            font-weight: bold;
+            margin-top: 20px;
+          }
         }
         .pc_alll {
           color: #ffd344;
@@ -95,79 +62,60 @@
         .mobile_all {
           color: #540aa8;
         }
+      }
 
-        
+      .bar_chart {
+        height: 100px;
+      }
+    }
+  }
+
+  // 3. 실시간 퀴즈 차트
+  .quiz_data {
+    // background-color: cadetblue;
+
+    .title_box {
+      display: flex;
+      align-items: flex-end;
+
+      .labels {
+        display: flex;
+        margin-left: 30px;
+        .label {
+          display: flex;
+          align-items: center;
+          margin-right: 22px;
+          font-size: 12px;
+
+          div {
+            width: 10px;
+            height: 10px;
+            margin-right: 8px;
+          }
+          span {
+            color: #333;
+          }
+
+          .one {
+            background-color: #ffd344;
+          }
+          .two {
+            background-color: #999999;
+          }
+          .three {
+            background-color: #540aa8;
+          }
+        }
       }
     }
     .bar_chart {
-        height: 10px;
-        width: 100%;
-    }
-    }
-  }
-
-  .chart_title {
-    font-size: 20px;
-    font-weight: 700;
-    }
-
-  // 3. 실시간 퀴즈 차트 
-  .quiz_data {
-    // background-color: cadetblue;
-  
-  .title_box {
-    display: flex;
-    align-items: flex-end;
-    
-    .labels {
-      display: flex;
-      margin-left: 30px;
-      .label {
+      // bar 나오는 곳
+      .each_bar {
         display: flex;
-        align-items: center;
-        margin-right: 22px;
-        font-size: 12px;
-
-        div {
-          width: 10px;
-          height: 10px;
-          margin-right: 8px;
-        }
-        span {
-          color: #333;
-        }
-
-        .one {
-          background-color: #ffd344;
-        }
-        .two {
-          background-color: #999999;
-        }
-        .three {
-          background-color: #540aa8;
-        }
+        // background-color: yellowgreen;
+        width: 200px;
+        // height: 400px;
       }
     }
-
-  }
-  .bar_chart{
-    // bar 나오는 곳 
-    .each_bar {
-      display: flex;
-      // background-color: yellowgreen;
-      width: 200px;
-      // height: 400px;
-    } 
-  }
-  }
-}
-
-
-// Lang data
-.lang_chart {
-  // background-color: aqua;
-  // width: 675px;
-  .myChart{
-    // padding: 20px;
   }
 }

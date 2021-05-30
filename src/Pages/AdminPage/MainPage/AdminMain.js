@@ -1,29 +1,27 @@
 import React from "react";
-import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { tabIdState } from "../../../recoil/quiz";
 import { useHistory } from "react-router";
-import "../MainPage/AdminMain.scss";
-
 import DataTotal from "./component/DataTotal";
 import QuizControl from "./component/QuizControl";
+import "../MainPage/AdminMain.scss";
 
 function AdminMain() {
-  const [tabId, setTabId] = useState(0);
-  const [adminTab, setAdminTab] = useState("TotalData");
-
-  const history = useHistory();
-
-  const goToLogin = () => {
-    localStorage.removeItem("token");
-    history.push("/");
-  };
+  const [tabId, setTabId] = useRecoilState(tabIdState);
 
   const tabHandler = (id) => {
     setTabId(id);
   };
 
+  const history = useHistory();
+  const goToLogin = () => {
+    localStorage.removeItem("token");
+    history.push("/");
+  };
+
   const TAB_OBJ = {
     0: <DataTotal />,
-    1: <QuizControl adminTab={adminTab} setAdminTab={setAdminTab} />,
+    1: <QuizControl />,
   };
 
   return (

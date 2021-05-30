@@ -5,7 +5,6 @@ import "./AdminLogin.scss";
 
 const AdminLogin = () => {
   const [password, setPassword] = useState("");
-  console.log(password);
 
   const pwInput = (e) => {
     setPassword(e.target.value);
@@ -22,14 +21,13 @@ const AdminLogin = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        // console.log(res);
-        // if (res["Message"] === "Invalid_paasword") {
-        //   alert("비밀번호가 틀렸습니다.");
-        // }
-        // if (res.token) {
-        localStorage.setItem("token", res["token"]);
-        history.push("/admin/main");
-        // }
+        if (res["Message"] === "Invalid_paasword") {
+          alert("비밀번호가 틀렸습니다.");
+        }
+        if (res.token) {
+          localStorage.setItem("token", res["token"]);
+          history.push("/admin/main");
+        }
       });
   };
 

@@ -1,10 +1,14 @@
 import React from "react";
+import { useRecoilState } from "recoil";
+import { introDataState } from "../../../../../../recoil/quiz";
 import CanvasJSReact from "../../../../../../assets/cnavasjs.react";
 var PlatformChart = CanvasJSReact.CanvasJSChart;
 
 function StackedBar() {
+  const [introData, setIntroData] = useRecoilState(introDataState);
+
   const options = {
-    height: 300,
+    height: 200,
     animationEnabled: true,
     theme: "light2",
     labels: {},
@@ -12,21 +16,18 @@ function StackedBar() {
       interval: 100,
       suffix: "%",
       labelFontColor: "white",
-      lineClolr: "white",
       lineThickness: 0,
     },
     data: [
       {
         type: "stackedBar100",
         showInLegend: false,
-        name: "PC&Console",
-        dataPoints: [{ y: 600, label: "PC & Console" }],
+        dataPoints: [{ y: introData.PC, label: "PC & Console" }],
       },
       {
         type: "stackedBar100",
         showInLegend: false,
-        name: "Mobile",
-        dataPoints: [{ y: 400, label: "Mobile" }],
+        dataPoints: [{ y: introData.Mobile, label: "Mobile" }],
       },
     ],
   };
