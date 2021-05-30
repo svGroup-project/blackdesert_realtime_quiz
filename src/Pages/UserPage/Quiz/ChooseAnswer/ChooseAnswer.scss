@@ -40,6 +40,7 @@
           #c48900
         );
       }
+
       span {
         position: absolute;
         top: -30px;
@@ -54,6 +55,15 @@
         padding-top: 60px;
         color: #999999;
       }
+    }
+
+    .content.selected {
+      background-image: linear-gradient(
+        to bottom,
+        #ffe078,
+        #fbc000 39%,
+        #c48900
+      );
     }
   }
 }

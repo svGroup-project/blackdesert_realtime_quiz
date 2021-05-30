@@ -9,8 +9,8 @@ const VideoPlayer = ({ width, height, movieUrl }) => {
         type="text/html"
         width={width}
         height={height}
-        // src={movieUrl}
-        src="https://www.youtube.com/embed/WMweEpGlu_U"
+        src={movieUrl}
+        // src="https://www.youtube.com/embed/WMweEpGlu_U"
         frameBorder="0"
         allowFullScreen
       ></iframe>

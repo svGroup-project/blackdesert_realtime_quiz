@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./ChooseAnswer.scss";
 
 const ChooseAnswer = ({ checkAnswer, data }) => {
+  const [isSelected, setIsSelected] = useState(false);
+
   // const onClickHandler = (idx) => {
   //   const trueOrFalse = checkAnswer(idx);
   //   if (trueOrFalse === true) {
@@ -12,6 +14,11 @@ const ChooseAnswer = ({ checkAnswer, data }) => {
   //     fetchAnswer(data.quiz_num, false);
   //   }
   // };
+
+  const onClickHandler = (idx) => {
+    checkAnswer(idx);
+    setIsSelected(!isSelected);
+  };
   return (
     <div className="chooseAnswer">
       <div className="title">
@@ -24,8 +31,8 @@ const ChooseAnswer = ({ checkAnswer, data }) => {
             return (
               <div
                 key={idx}
-                className="content"
-                onClick={() => checkAnswer(idx + 1)}
+                className={`${isSelected ? "content selected" : "content"}`}
+                onClick={() => onClickHandler(idx + 1)}
               >
                 <span>{key}</span>
                 <div className="answer">{value}</div>

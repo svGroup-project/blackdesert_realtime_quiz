@@ -9,13 +9,11 @@ const Intro = () => {
   const [platform, setPlatform] = useState("");
   const history = useHistory();
 
-  const socket = new WebSocket("ws://10.58.2.221:8000/users");
+  const socket = new WebSocket("ws://192.168.201.200:3000/");
   socket.onopen = () => {
     console.log("intro: 웹소켓 연결 OK");
-    //서버에서 "입장허용" status를 받으면 isActive false -> true하여 입장버튼 활성화
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log(data);
       if (data.status === "입장허용") {
         setIsActive(!isActive);
       }
@@ -43,15 +41,14 @@ const Intro = () => {
   const onClickHandler = (device) => {
     device === "PC" ? setPlatform("PC") : setPlatform("Mobile");
   };
-
   const goToUserInfo = () => {
-    // 버튼이 active되지 않거나 platform이 선택되지않으면 quiz로 넘어가지 않음
-    // if (isActive !== true || platform === "") {
-    //   return;
-    // }
+    //  버튼이 active되지 않거나 platform이 선택되지않으면 quiz로 넘어가지 않음
+    if (isActive !== true || platform === "") {
+      return;
+    }
 
-    // const userLang = { language: language };
-    // socket.send(JSON.stringify(userLang));
+    const userLang = { language: language };
+    socket.send(JSON.stringify(userLang));
 
     history.push({
       pathname: "/userInfo",
@@ -60,6 +57,9 @@ const Intro = () => {
         platform,
       },
     });
+
+    socket.close();
+    console.log("intro 연결종료");
   };
 
   return (

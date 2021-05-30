@@ -1,12 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react/cjs/react.development";
-import BottomLogo from "../../../Components/BottomLogo/BottomLogo";
 import StatusBar from "../../../Components/StatusBar/StatusBar";
 import VideoPlayer from "../../../Components/VideoPlayer/VideoPlayer";
 import ChooseAnswer from "./ChooseAnswer/ChooseAnswer";
 import ConfirmAnswer from "./ConfirmAnswer/ConfirmAnswer";
-import Correct from "./Correct/Correct";
-import Wrong from ".//Wrong/Wrong";
 import EndingStatement from "./EndingStatement/EndingStatement";
 import QuizReward from "./QuizReward/QuizReward";
 import ShowQuiz from "./ShowQuiz/ShowQuiz";
@@ -34,6 +31,7 @@ const Quiz = () => {
     if (!userAnswer) {
       return setIsCorrectAnswer(null);
     }
+
     const keyByValue = getKeyByValue(data.is_answer, true);
     return userAnswer === Number(keyByValue)
       ? setIsCorrectAnswer(true)
@@ -68,9 +66,9 @@ const Quiz = () => {
   };
 
   useEffect(() => {
-    const socket = new WebSocket("ws://192.168.0.24:3000/quizes");
+    const socket = new WebSocket("ws://192.168.201.200:3000/quizes");
     socket.onopen = () => {
-      console.log("quiz: 웹소켓 재연결 OK");
+      console.log("quiz: 웹소켓 연결 OK");
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         const status = data.status;
@@ -99,8 +97,8 @@ const Quiz = () => {
     if (status === "보상확인") {
       const Authorization = localStorage.getItem("Authorization");
       // 실제 api: http://10.58.2.221:8000/reward/${quizNumRef.current}
-      // 실제 api(재유님): `http://192.168.0.24:8000/reward/${quizNumRef.current}`
-      fetch(`http://192.168.0.24:8000/reward/${quizNumRef.current}`, {
+      // 실제 api(재유님): `http://192.168.201.200:8000/reward/${quizNumRef.current}`
+      fetch(`http://192.168.201.200:8000/reward/${quizNumRef.current}`, {
         headers: {
           Authorization: Authorization,
         },
@@ -110,8 +108,8 @@ const Quiz = () => {
     } else if (status === "퀴즈시작") {
       const Authorization = localStorage.getItem("Authorization");
       // 실제 api: http://10.58.2.221:8000/quiz/${quizNumRef.current}
-      // 실제 api(재유님):`http://192.168.0.24:8000/quiz/${quizNumRef.current}`
-      fetch(`http://192.168.0.24:8000/quiz/${quizNumRef.current}`, {
+      // 실제 api(재유님):`http://192.168.201.200:8000/quiz/${quizNumRef.current}`
+      fetch(`http://192.168.201.200:8000/quiz/${quizNumRef.current}`, {
         headers: {
           Authorization: Authorization,
         },
@@ -122,7 +120,7 @@ const Quiz = () => {
         });
     } else if (status === "정답확인") {
       const Authorization = localStorage.getItem("Authorization");
-      fetch(`http://192.168.0.24:8000/quiz`, {
+      fetch(`http://192.168.201.200:8000/quiz`, {
         method: "POST",
         headers: {
           Authorization: Authorization,
@@ -137,14 +135,13 @@ const Quiz = () => {
           if (res.result === "success") {
             // 정답확인중 component를 보여주다가 success를 받으면 정답/오답화면을 보여줌
             setIsSuccess(true);
-            console.log(res.result);
-            console.log(isSuccess);
+            console.log(res);
           }
         });
     } else if (status === "결과확인") {
       const Authorization = localStorage.getItem("Authorization");
-      // 실제 api: http://10.58.2.221:8000/result/
-      fetch("/data/quizResult.json", {
+      // 실제 api: http://192.168.201.200:8000/result/
+      fetch("http://192.168.201.200:8000/result/", {
         headers: {
           Authorization: Authorization,
         },

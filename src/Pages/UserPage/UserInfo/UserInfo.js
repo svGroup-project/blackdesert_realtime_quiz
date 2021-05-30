@@ -12,77 +12,79 @@ const UserInfo = () => {
   const [nickName, setNickName] = useState("");
   const [input, setInput] = useState("");
   const [movieUrl, setMovieUrl] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
   const location = useLocation();
   const history = useHistory();
 
   const { language, platform } = location.state;
-  //const socket = new WebSocket("ws://192.168.200.104:8000/quizes");
 
   //language에 맞는 유투브 링크 받기
   useEffect(() => {
     // 실제 api주소 : `http://localhost:8000/movie-url?language=${language}`
-    fetch(`/data/movieUrl.json`)
+    fetch(`http://192.168.201.200:8000/movie-url?language=${language}`)
       .then((res) => res.json())
       .then((res) => setMovieUrl(res["movie-url"]));
   }, []);
+
+  // console.log(movieUrl);
+
+  useEffect(() => {
+    setNickName(input);
+  }, [input]);
+
+  const socket = new WebSocket("ws://192.168.201.200:3000/");
+  useEffect(() => {
+    socket.onopen = () => {
+      console.log("userInfo: 웹소켓 연결 OK");
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        const status = data.status;
+        console.log(status);
+        if (status === "보상확인") {
+          history.push({
+            pathname: "/quiz",
+            state: {
+              movieUrl,
+              quiz_num: data.quiz_num,
+            },
+          });
+        }
+      };
+      socket.close();
+      console.log("userinfo 연결종료");
+    };
+  }, [isClicked]);
 
   const onChangeHandler = (e) => {
     setInput(e.target.value);
   };
 
   const onClickHandler = () => {
-    setNickName(input);
+    setIsClicked(!isClicked);
     // DB에 정보 보내면 서버에서 token 받아서 localstorage에 저장하기
     let requestBody = {
       nickname: nickName,
       language: language,
       platform: platform,
     };
-    fetch("http://192.168.0.24:8000/users", {
+    fetch("http://192.168.201.200:8000/users", {
       method: "POST",
       body: JSON.stringify(requestBody),
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         localStorage.setItem("Authorization", res["token"]);
+        //console.log(res);
       });
-
-    // db에 유저 정보 저장하면서 ws 재오픈 및 /quiz로 경로 이동
-    // socket.onopen = () => {
-    //   console.log("userInfo: 웹소켓 재연결 OK");
-    //   socket.onmessage = (event) => {
-    //     if (event.status === "보상확인") {
-    //       history.push({
-    //         pathname: "/quiz",
-    //         state: {
-    //           movieUrl,
-    //           quiz_num: event.quiz_num,
-    //         },
-    //       });
-    //     }
-    //   };
-    // };s
-
-    // 웹소켓을 언제 닫는지? 꼭 닫아야하는지?
-    // socket.close();
   };
-  console.log(
-    `lang:`,
-    language,
-    "platform:",
-    platform,
-    `input:`,
-    input,
-    `nick:`,
-    nickName
-  );
+
+  // db에 유저 정보 저장하면서 ws 재오픈 및 /quiz로 경로 이동
 
   return (
     <div className="userInfoContainer">
       <StatusBar />
       <VideoPlayer width={"1040px"} height={"584.9px"} movieUrl={movieUrl} />
-      {nickName ? (
+      {isClicked ? (
         <WaitingStatement />
       ) : (
         <NicknameInput
