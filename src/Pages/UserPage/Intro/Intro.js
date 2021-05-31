@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BottomLogo from "../../../Components/BottomLogo/BottomLogo";
 import { useHistory } from "react-router";
+import { WS } from "../../../config";
 import "./Intro.scss";
 
 const Intro = () => {
@@ -9,7 +10,7 @@ const Intro = () => {
   const [platform, setPlatform] = useState("");
   const history = useHistory();
 
-  const socket = new WebSocket("ws://192.168.201.200:3000/");
+  const socket = new WebSocket(`${WS}/users`);
   socket.onopen = () => {
     console.log("intro: 웹소켓 연결 OK");
     socket.onmessage = (event) => {
@@ -59,7 +60,6 @@ const Intro = () => {
     });
 
     socket.close();
-    console.log("intro 연결종료");
   };
 
   return (

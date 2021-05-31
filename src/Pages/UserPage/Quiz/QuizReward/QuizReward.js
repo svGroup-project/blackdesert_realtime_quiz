@@ -2,7 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react/cjs/react.development";
 import "./QuizReward.scss";
 
-const QuizReward = ({ data }) => {
+const QuizReward = ({ setIsCorrectAnswer, data }) => {
+  // 이전 문제에서 선택한 답이 초기화되는 과정
+  useEffect(() => {
+    setIsCorrectAnswer(null);
+  }, []);
+
   return (
     <div className="quizReward">
       <div className="title">
