@@ -18,7 +18,11 @@ function CurrentQuiz({
   const confirmAnswer = () => {
     setConfirmBtn(!confirmBtn);
     // 이게 한단계 늦게 보내짐
-    setStatus("정답확인");
+    if (quizNumber < 15) {
+      setStatus("정답확인");
+    } else {
+      setStatus("결과확인");
+    }
   };
 
   const toNextQize = () => {
@@ -29,7 +33,7 @@ function CurrentQuiz({
       setFirstComponent(true);
     } else {
       setStatus("결과확인");
-      setTabId(0);
+      // setTabId(0);
     }
   };
 
@@ -39,9 +43,9 @@ function CurrentQuiz({
     <section className="current_quiz">
       <div className="quiz">{qestion}</div>
       <ul>
-        {answerNum.map((idx) => {
+        {answerNum.map((idx, id) => {
           return (
-            <li>
+            <li key={id}>
               <div className={!confirmBtn && isAnswer[idx] && "is_correct_div"}>
                 {idx}
               </div>

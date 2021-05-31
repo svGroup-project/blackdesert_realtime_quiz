@@ -1,5 +1,10 @@
 import { atom } from "recoil";
 
+export const quizStatus = atom({
+  key: "quizStatus",
+  default: {},
+});
+
 export const tabIdState = atom({
   key: "tabIdState",
   default: 0,
