@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react/cjs/react.development";
+import React, { useEffect } from "react";
 import "./QuizReward.scss";
 
 const QuizReward = ({ setIsCorrectAnswer, data }) => {
