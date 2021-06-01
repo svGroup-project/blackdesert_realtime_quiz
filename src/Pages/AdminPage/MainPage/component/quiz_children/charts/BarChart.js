@@ -1,11 +1,10 @@
 import React from "react";
-import { useRecoilState } from "recoil";
-import { userAnswerState, introDataState } from "../../../../../../recoil/quiz";
+import { useRecoilValue } from "recoil";
+import { userAnswerState } from "../../../../../../recoil/quiz";
 import { Bar, defaults } from "react-chartjs-2";
 
 function BarChart({ data }) {
-  const [userAnswer, setUserAnswer] = useRecoilState(userAnswerState);
-  console.log(userAnswer.user.total);
+  const userAnswer = useRecoilValue(userAnswerState);
   defaults.scales.linear.max = userAnswer.user.total;
 
   const labels = Object.keys(data);
@@ -29,13 +28,21 @@ function BarChart({ data }) {
         options={{
           plugins: {
             legend: {
-              title: {
-                display: false,
-              },
+              display: false,
             },
           },
           scales: {
-            // display: false,
+            x: {
+              gridLines: {
+                color: "rgba(0, 0, 0, 0)",
+              },
+            },
+            y: {
+              gridLines: {
+                color: "rgba(0, 0, 0, 0)",
+              },
+            },
+
             title: {
               display: false,
             },
@@ -45,13 +52,6 @@ function BarChart({ data }) {
           },
           labels: {
             display: false,
-          },
-          tooltips: {
-            callbacks: {
-              label: (tooltipItem) =>
-                `${tooltipItem.yLabel}: ${tooltipItem.xLabel}`,
-              title: () => null,
-            },
           },
         }}
       />

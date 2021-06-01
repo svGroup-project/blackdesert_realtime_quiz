@@ -1,10 +1,11 @@
 import React from "react";
 import StackedBar from "./charts/StackedBar";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { introDataState } from "../../../../../recoil/quiz";
 
 function Platform() {
-  const [introData, setIntroData] = useRecoilState(introDataState);
+  const introData = useRecoilValue(introDataState);
+
   return (
     <div className="platform_data">
       <div className="chart_title">게임플랫폼 별 참여 인원</div>

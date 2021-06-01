@@ -1,9 +1,7 @@
 import React from "react";
-import { Doughnut, defaults } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import { useRecoilState } from "recoil";
 import { introDataState } from "../../../../../../recoil/quiz";
-
-// defaults.animation = true;
 
 function DoughnutChart() {
   const [introData, setIntroData] = useRecoilState(introDataState);

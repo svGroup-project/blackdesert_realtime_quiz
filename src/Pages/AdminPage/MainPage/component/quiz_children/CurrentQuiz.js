@@ -1,28 +1,22 @@
-import React, { useState } from "react";
-import { useRecoilState } from "recoil";
-import { tabIdState, statusState } from "../../../../../recoil/quiz";
+import React from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  confirmBtnState,
+  quizNumberState,
+  statusState,
+  componentOrderState,
+} from "../../../../../recoil/quiz";
 import "../../component/QuizControl.scss";
 
-function CurrentQuiz({
-  qestion,
-  answer,
-  isAnswer,
-  setQuizNumber,
-  quizNumber,
-  setFirstComponent,
-}) {
-  const [tabId, setTabId] = useRecoilState(tabIdState);
-  const [status, setStatus] = useRecoilState(statusState);
-  const [confirmBtn, setConfirmBtn] = useState(true);
+function CurrentQuiz({ qestion, answer, isAnswer }) {
+  const [confirmBtn, setConfirmBtn] = useRecoilState(confirmBtnState);
+  const [quizNumber, setQuizNumber] = useRecoilState(quizNumberState);
+  const setStatus = useSetRecoilState(statusState);
+  const setComponentOrder = useSetRecoilState(componentOrderState);
 
   const confirmAnswer = () => {
     setConfirmBtn(!confirmBtn);
-    // 이게 한단계 늦게 보내짐
-    if (quizNumber < 15) {
-      setStatus("정답확인");
-    } else {
-      setStatus("결과확인");
-    }
+    setStatus("정답확인");
   };
 
   const toNextQize = () => {
@@ -30,10 +24,10 @@ function CurrentQuiz({
     if (quizNumber < 15) {
       setStatus("next");
       setQuizNumber(quizNumber + 1);
-      setFirstComponent(true);
+      setComponentOrder(0);
     } else {
       setStatus("결과확인");
-      // setTabId(0);
+      setComponentOrder(2);
     }
   };
 

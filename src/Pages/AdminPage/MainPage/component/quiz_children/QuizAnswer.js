@@ -1,10 +1,10 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userAnswerState } from "../../../../../recoil/quiz";
 import BarChart from "./charts/BarChart";
 
 function QuizAnswer() {
-  const [userAnswer, setUserAnswer] = useRecoilState(userAnswerState);
+  const userAnswer = useRecoilValue(userAnswerState);
   const quizzes = Object.keys(userAnswer).slice(0, 15);
 
   return (

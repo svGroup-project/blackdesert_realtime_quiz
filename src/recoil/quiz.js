@@ -5,11 +5,6 @@ export const quizStatus = atom({
   default: {},
 });
 
-export const tabIdState = atom({
-  key: "tabIdState",
-  default: 0,
-});
-
 export const statusState = atom({
   key: "statusState",
   default: "대기",
@@ -20,9 +15,24 @@ export const quizNumberState = atom({
   default: 1,
 });
 
+export const tabIdState = atom({
+  key: "tabIdState",
+  default: 0,
+});
+
+export const componentOrderState = atom({
+  key: "componentOrderState",
+  default: 0,
+});
+
 export const nextStepState = atom({
   key: "nextStepState",
   default: 0,
+});
+
+export const confirmBtnState = atom({
+  key: "confirmBtnState",
+  default: true,
 });
 
 export const userAnswerState = atom({

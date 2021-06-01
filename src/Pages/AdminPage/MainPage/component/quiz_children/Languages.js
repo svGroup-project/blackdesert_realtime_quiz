@@ -1,11 +1,12 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { introDataState } from "../../../../../recoil/quiz";
 import DoughnutChart from "./charts/DoughnutChart";
 import "./Languages.scss";
 
 function Languages() {
-  const [introData, setIntroData] = useRecoilState(introDataState);
+  const introData = useRecoilValue(introDataState);
+
   return (
     <div className="lang_data">
       <div className="chart_title">언어별 참여 인원</div>

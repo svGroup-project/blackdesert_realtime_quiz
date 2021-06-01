@@ -1,12 +1,17 @@
 import React from "react";
-import { useRecoilState } from "recoil";
-import { nextStepState, statusState } from "../../../../../../src/recoil/quiz";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  nextStepState,
+  statusState,
+  componentOrderState,
+} from "../../../../../../src/recoil/quiz";
 import { intro_step } from "./intro_step";
 import "../../component/QuizControl.scss";
 
-function BeforeQuiz({ setFirstComponent }) {
+function BeforeQuiz() {
   const [nextStep, setNextStep] = useRecoilState(nextStepState);
-  const [status, setStatus] = useRecoilState(statusState);
+  const setStatus = useSetRecoilState(statusState);
+  const setComponentOrder = useSetRecoilState(componentOrderState);
 
   const handleStep = () => {
     nextStep < 2 ? setNextStep(nextStep + 1) : setNextStep(nextStep - 1);
@@ -20,7 +25,7 @@ function BeforeQuiz({ setFirstComponent }) {
     if (nextStep === 2) {
       setStatus("퀴즈시작");
       setNextStep(1);
-      setFirstComponent(false);
+      setComponentOrder(1);
     }
   };
 

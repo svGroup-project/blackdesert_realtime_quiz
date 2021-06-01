@@ -1,5 +1,5 @@
 import React from "react";
-import { Pie, defaults } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 
 function LangTotal() {
   return (
@@ -34,12 +34,6 @@ function LangTotal() {
                 ],
                 borderWidth: 1,
               },
-              // {
-              //   lable: "Quantity",
-              //   data: [10, 12, 34, 53, 12, 34],
-              //   backgroundColor: "orange",
-              //   borderColor: "red",
-              // },
             ],
           }}
           height={300}

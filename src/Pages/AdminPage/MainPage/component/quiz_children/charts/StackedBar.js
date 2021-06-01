@@ -1,17 +1,17 @@
 import React from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { introDataState } from "../../../../../../recoil/quiz";
 import CanvasJSReact from "../../../../../../assets/cnavasjs.react";
+
 var PlatformChart = CanvasJSReact.CanvasJSChart;
 
 function StackedBar() {
-  const [introData, setIntroData] = useRecoilState(introDataState);
+  const introData = useRecoilValue(introDataState);
 
   const options = {
     height: 200,
     animationEnabled: true,
     theme: "light2",
-    labels: {},
     axisY: {
       interval: 100,
       suffix: "%",
