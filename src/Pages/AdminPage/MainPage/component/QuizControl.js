@@ -57,17 +57,6 @@ function QuizControl() {
     2: <QuizEnd />,
   };
 
-  // MockData;
-  // useEffect(() => {
-  //   if (status === "퀴즈시작" || "정답확인") {
-  //     fetch("/data/quiz.json")
-  //       .then((res) => res.json())
-  //       .then((res) => {
-  //         setQuiz(res);
-  //       });
-  //   }
-  // }, []);
-
   return (
     <div className="total_data">
       <div className="realtime">실시간 현장 컨트롤</div>

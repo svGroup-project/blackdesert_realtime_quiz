@@ -25,7 +25,6 @@ const AdminLogin = () => {
           alert("비밀번호가 틀렸습니다.");
         }
         if (res.token) {
-          console.log(res.token);
           localStorage.setItem("token", res["token"]);
           history.push("/admin/main");
         }

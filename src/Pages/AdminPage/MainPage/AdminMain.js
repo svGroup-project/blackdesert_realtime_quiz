@@ -1,26 +1,27 @@
 import React from "react";
-import { useRecoilState } from "recoil";
-import { tabIdState } from "../../../recoil/quiz";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { tabIdState, statusState } from "../../../recoil/quiz";
 import { useHistory } from "react-router";
 import DataTotal from "./component/DataTotal";
 import QuizControl from "./component/QuizControl";
+import Ready from "./component/quiz_children/Ready";
 import "../MainPage/AdminMain.scss";
 
 function AdminMain() {
   const [tabId, setTabId] = useRecoilState(tabIdState);
-
+  const status = useRecoilValue(statusState);
   const tabHandler = (id) => {
     setTabId(id);
   };
 
   const history = useHistory();
-  const goToLogin = () => {
+  const goToLoginPage = () => {
     localStorage.removeItem("token");
     history.push("/");
   };
 
   const TAB_OBJ = {
-    0: <DataTotal />,
+    0: status !== "대기" ? <DataTotal /> : <Ready />,
     1: <QuizControl />,
   };
 
@@ -70,7 +71,7 @@ function AdminMain() {
             </button>
           </div>
 
-          <button onClick={goToLogin} className="logout_btn">
+          <button onClick={goToLoginPage} className="logout_btn">
             <img src="/images/admin_page/logout.png" alt="Logout" />
             로그아웃
           </button>

@@ -13,7 +13,6 @@ function DataTotal() {
 
   useEffect(() => {
     fetch(`${API}/chart`, {
-      // fetch("/data/chart.json", {
       method: "GET",
     })
       .then((res) => res.json())
