@@ -1,0 +1,19 @@
+.confirmAnswer {
+  background-color: #ffffff;
+  width: 1720px;
+  height: 280px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 280px;
+
+  .fa-hourglass-half {
+    margin-right: 40px;
+  }
+
+  .checkingAnswer {
+    font-size: 60px;
+    span {
+      font-weight: bold;
+    }
+  }
+}

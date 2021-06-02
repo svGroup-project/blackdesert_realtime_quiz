@@ -1,0 +1,17 @@
+.rewardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+
+  .rewardStandard {
+    font-size: 28px;
+    padding: 8px;
+    border: solid 2px #000000;
+    font-weight: bold;
+  }
+  .rewardStandardContents {
+    margin-top: 27px;
+    font-size: 56px;
+  }
+}

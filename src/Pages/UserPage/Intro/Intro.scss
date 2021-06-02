@@ -1,0 +1,146 @@
+.introContainer {
+  background: url("../../../../src/imgs/background2x.png") center/cover
+    no-repeat;
+  height: 100vh;
+  font-family: "Gmarket Sans";
+
+  .titleContainer {
+    width: 840px;
+    text-align: center;
+    padding-top: 128px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    .shortTitle img {
+      width: 277.6px;
+      height: 33.1px;
+      margin-top: 27.3px;
+      margin-bottom: 30px;
+    }
+  }
+
+  .languageContainer {
+    width: 840px;
+    height: 180px;
+    text-align: center;
+    margin: 0 auto 30px auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .langsTitle {
+      font-size: 20px;
+      color: #ffffff;
+      margin: 0 auto;
+    }
+
+    .langs {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 20px;
+
+      .imgContainer {
+        border: 1px solid white;
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
+        opacity: 0.5;
+      }
+
+      .imgContainer.selected {
+        background: linear-gradient(to bottom, #ffe078, #fbc000, #c48900);
+        opacity: 1;
+      }
+    }
+  }
+
+  .platformContainer {
+    width: 840px;
+    height: 180px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-shadow: 8px 8px 20px 0 rgba(0, 0, 0, 0.16);
+
+    .platformTitle {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffffff;
+      margin: 0 auto;
+    }
+
+    .choosePlatform {
+      display: flex;
+      justify-content: space-around;
+      opacity: 0.7;
+
+      .pc,
+      .mobile {
+        padding: 0 80px;
+        flex-basis: 50%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .middleBar {
+        width: 1px;
+        height: 92px;
+        background-color: #ffffff;
+        opacity: 0.7;
+      }
+
+      .pcTitle,
+      .mobileTitle {
+        font-size: 22px;
+        color: #ffffff;
+        opacity: 0.7;
+
+        line-height: 1.13;
+        text-align: left;
+      }
+
+      .pcTitle.selected,
+      .mobileTitle.selected {
+        color: #ffd344;
+        line-height: 1.13;
+        text-align: left;
+        opacity: 1;
+      }
+    }
+  }
+
+  .btnContainer {
+    margin: 30px auto 0 auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 840px;
+    height: 80px;
+    text-align: center;
+    padding-top: 15px;
+
+    .enterBtn {
+      font-size: 36px;
+      color: #ffffff;
+      background-color: transparent;
+      font-weight: bold;
+    }
+  }
+
+  .btnContainer.active {
+    background-color: #ffffff;
+    cursor: pointer;
+
+    .enterBtn {
+      color: #ffd344;
+      cursor: pointer;
+    }
+  }
+}

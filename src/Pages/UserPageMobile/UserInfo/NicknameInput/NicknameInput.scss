@@ -1,0 +1,42 @@
+.nickNameInput {
+  position: relative;
+  width: 1040px;
+  height: 180px;
+  background-color: white;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .nickTitle {
+    font-size: 32px;
+    font-weight: bold;
+    margin-right: 5px;
+    color: #000000;
+  }
+  .nickname {
+    width: 780px;
+    height: 82px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 30px;
+    border: solid 1px #dddddd;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .nicknameBtn {
+    position: absolute;
+    right: 48px;
+    background-color: #999999;
+    width: 120px;
+    height: 82px;
+    font-size: 18px;
+    color: #ffffff;
+    &:hover {
+      background: linear-gradient(to bottom, #ffe078, #fbc000, #c48900);
+    }
+  }
+}

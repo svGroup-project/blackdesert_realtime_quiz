@@ -1,0 +1,20 @@
+.correctAnswer {
+  background-color: #ffffff;
+  width: 1720px;
+  height: 280px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 280px;
+
+  .fa-circle {
+    margin-right: 40px;
+    color: #ffd344;
+  }
+
+  .statement {
+    font-size: 60px;
+    .highlight {
+      font-weight: bold;
+    }
+  }
+}

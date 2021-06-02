@@ -1,0 +1,12 @@
+.eachQuiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+  line-height: 1.4;
+
+  .quizContents {
+    margin-top: 27px;
+    font-size: 56px;
+  }
+}
