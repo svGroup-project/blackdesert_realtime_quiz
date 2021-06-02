@@ -17,7 +17,7 @@ export const quizNumberState = atom({
 
 export const tabIdState = atom({
   key: "tabIdState",
-  default: 0,
+  default: 1,
 });
 
 export const componentOrderState = atom({
