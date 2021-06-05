@@ -22,7 +22,7 @@ function Platform() {
         <div className="count_all pc_all">
           <div className="top">
             <img src="/images/admin_page/pc.png" alt="pc인원수" />
-            <span>PC & Console</span>
+            <span>PC {"&"} Console</span>
           </div>
           <div className="count pc_alll">{introData.PC}</div>
         </div>

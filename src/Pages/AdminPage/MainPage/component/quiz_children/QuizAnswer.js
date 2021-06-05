@@ -28,9 +28,9 @@ function QuizAnswer() {
       </div>
       <div className="bar_chart">
         <div className="each_bar">
-          {quizzes.map((quizNumber, idx) => {
-            return <BarChart key={idx} data={userAnswer[quizNumber]} />;
-          })}
+          {quizzes.map((quizNumber, idx) => (
+            <BarChart key={idx} data={userAnswer[quizNumber]} />
+          ))}
         </div>
       </div>
     </div>

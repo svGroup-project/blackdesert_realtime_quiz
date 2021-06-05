@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { tabIdState, statusState } from "../../../recoil/quiz";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import DataTotal from "./component/DataTotal";
 import QuizControl from "./component/QuizControl";
 import Ready from "./component/quiz_children/Ready";
@@ -78,7 +78,7 @@ function AdminMain() {
         </div>
       </div>
 
-      <main>{TAB_OBJ[tabId]}</main>
+      <div>{TAB_OBJ[tabId]}</div>
     </div>
   );
 }
