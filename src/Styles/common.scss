@@ -1,5 +1,5 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
-$PrimaryColor: rgb(127, 124, 20);
+// $PrimaryColor: rgb(127, 124, 20);
 
 %flex-center {
   display: flex;
@@ -24,7 +24,6 @@ body {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: $PrimaryBlack;
 }
 
 a:visited,
