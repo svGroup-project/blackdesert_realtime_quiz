@@ -1,0 +1,117 @@
+.TotalData {
+  display: flex;
+  flex-direction: column;
+  width: 1480px;
+  height: 920px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 65px;
+
+  .chart_title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .intro_data {
+    display: flex;
+
+    // 2. 플랫폼 차트
+    .platform_data {
+      width: 675px;
+
+      .platform_count {
+        display: flex;
+
+        .pc_all {
+          border-left: 1px solid #dddddd;
+          border-right: 1px solid #dddddd;
+        }
+
+        .count_all {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          width: 200px;
+          margin: 20px 10px;
+
+          .top {
+            display: flex;
+            align-items: center;
+          }
+          img {
+            height: 23px;
+            margin-right: 10px;
+          }
+
+          span {
+            color: #333333;
+            font-size: 16px;
+          }
+
+          .count {
+            font-size: 44px;
+            font-weight: bold;
+            margin-top: 20px;
+          }
+        }
+        .pc_alll {
+          color: #ffd344;
+        }
+        .mobile_all {
+          color: #540aa8;
+        }
+      }
+
+      .bar_chart {
+        height: 100px;
+      }
+    }
+  }
+
+  // 3. 실시간 퀴즈 차트
+  .quiz_data {
+
+    .title_box {
+      display: flex;
+      align-items: flex-end;
+
+      .labels {
+        display: flex;
+        margin-left: 30px;
+        .label {
+          display: flex;
+          align-items: center;
+          margin-right: 22px;
+          font-size: 12px;
+
+          div {
+            width: 10px;
+            height: 10px;
+            margin-right: 8px;
+          }
+          span {
+            color: #333;
+          }
+
+          .one {
+            background-color: #ffd344;
+          }
+          .two {
+            background-color: #999999;
+          }
+          .three {
+            background-color: #540aa8;
+          }
+        }
+      }
+    }
+    .bar_chart {
+
+      .each_bar {
+        display: flex;
+        width: 200px;
+      }
+    }
+  }
+}

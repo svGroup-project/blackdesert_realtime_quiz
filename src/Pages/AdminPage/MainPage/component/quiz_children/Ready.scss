@@ -1,0 +1,27 @@
+// 퀴즈 시작 전 Data 집계 페이지
+.TotalData{
+  .announce_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 150px;
+
+    img {
+      width: 240px;
+      margin-bottom: 30px;
+    }
+
+    .announce {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 40px;
+      font-weight: 700;
+
+      p {
+        margin-bottom: 20px;
+      }
+    }  
+  }
+}

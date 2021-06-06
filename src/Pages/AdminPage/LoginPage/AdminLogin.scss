@@ -1,0 +1,86 @@
+.background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("../../../images/main_background.png");
+  background-size: cover;
+  height: 100vh;
+  font-family: "Noto Sans KR", sans-serif;
+
+  .adminLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    background-color: white;
+    width: 528px;
+    height: 650px;
+
+    .main_logo {
+      margin: 100px 0 20px 0;
+      width: 336px;
+      height: 114px;
+    }
+    .page_info {
+      font-size: 14px;
+      color: #999;
+    }
+
+    .login_box {
+      display: flex;
+      margin: auto;
+      flex-direction: column;
+      align-items: center;
+
+      .password_input {
+        position: relative;
+        img {
+          position: absolute;
+          width: 32px;
+          top: 12px;
+          left: 13px;
+        }
+        input {
+          width: 400px;
+          height: 56px;
+          border: solid 1px #c7c7c7;
+          padding: 12px 20px 12px 50px;
+          outline: none;
+
+          &::placeholder {
+            font-size: 16px;
+            font-family: "Noto Sans KR", sans-serif;
+            color: #c7c7c7;
+          }
+        }
+      }
+
+      input[type="password"] {
+        font-size: 24px;
+      }
+
+      button {
+        margin-top: 40px;
+        width: 400px;
+        height: 70px;
+        background-color: #ffd344;
+        color: white;
+        font-size: 24px;
+      }
+    }
+    .copyright {
+      font-size: 12px;
+      margin-bottom: 80px;
+      color: #9b9b9b;
+    }
+  }
+
+  footer {
+    position: absolute;
+    bottom: 60px;
+    img {
+      width: 320px;
+      height: 52.6px;
+    }
+  }
+}
